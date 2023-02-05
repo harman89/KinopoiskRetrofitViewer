@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Kinopoisk Retrofit Viewer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Registration">Registration</string>
+    <string name="Log_In">Log In</string>
+    <string name="Back">Back</string>
+    <string name="Remember_me">Remember Me</string>
+    <string name="Name">E-Mail</string>
+    <string name="Password">Password</string>
+    <string name="Confirm">Confirm Password</string>
+    <string name="Submit">Submit</string>
+    <string name="Filter">Filter</string>
+</resources>
