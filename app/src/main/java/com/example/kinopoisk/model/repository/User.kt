@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData
 import com.example.kinopoisk.model.KinopoiskApp
 import com.example.kinopoisk.model.db.UserClass
 import com.example.kinopoisk.model.db.dbClass
+import com.example.kinopoisk.model.retrofit.api.KinopoiskApi
+import com.example.kinopoisk.model.retrofit.data.Film
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class User : UserRepository {
     val db : dbClass = KinopoiskApp.db
@@ -28,5 +31,8 @@ class User : UserRepository {
         var user : LiveData<UserClass?> = db.dao().getIsLogged()
         user.value?.isLogged = false
         user.value?.let { db.dao().logOutUser(it) }
+    }
+    override suspend fun getFilm(Id: Long) : Response<Film> {
+        return KinopoiskApi.api.getFilm(Id)
     }
 }

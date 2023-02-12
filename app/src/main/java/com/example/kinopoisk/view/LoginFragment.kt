@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
             valTextPassword = textPassword.text.toString()
             viewModel.getUser(valTextEmail,valTextPassword).observe(activity as MainActivity, Observer {
                 if(it!=null){
-                    goToFragment(FilmListFragment.newInstance())
+                    goToFragment(FilmDetailFragment.newInstance())
                 }
                 else{
                     Toast.makeText(requireContext(),"Wrong Email or Password. Try again", Toast.LENGTH_SHORT).show()

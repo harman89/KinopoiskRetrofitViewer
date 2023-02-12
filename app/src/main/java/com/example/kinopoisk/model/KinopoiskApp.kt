@@ -8,6 +8,8 @@ class KinopoiskApp : Application() {
     companion object{
         lateinit var db : dbClass
         private lateinit var instance : KinopoiskApp
+        val API_KEY = "1d4209fb-a97c-4ac8-a3e7-e0a54f3ca88e"
+        val API_URL = "https://kinopoiskapiunofficial.tech"
     }
     override fun onCreate() {
         super.onCreate()
