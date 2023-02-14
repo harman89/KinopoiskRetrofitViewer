@@ -47,4 +47,10 @@ class MainViewModel(private val repository: UserRepository = User()) : ViewModel
             film.value = repository.getFilm(id)
         }
     }
+    //TODO: Доделать
+    fun getTopFilms(page: Int, type : String){
+        viewModelScope.launch {
+
+        }
+    }
 }

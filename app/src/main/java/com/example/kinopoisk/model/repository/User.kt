@@ -6,6 +6,7 @@ import com.example.kinopoisk.model.db.UserClass
 import com.example.kinopoisk.model.db.dbClass
 import com.example.kinopoisk.model.retrofit.api.KinopoiskApi
 import com.example.kinopoisk.model.retrofit.data.Film
+import com.example.kinopoisk.model.retrofit.data.TopFilms
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,5 +35,8 @@ class User : UserRepository {
     }
     override suspend fun getFilm(Id: Long) : Response<Film> {
         return KinopoiskApi.api.getFilm(Id)
+    }
+    override suspend fun getTopFilms(page : Int, type : String) : Response<TopFilms> {
+        return KinopoiskApi.api.getTopFilms(page, type)
     }
 }
