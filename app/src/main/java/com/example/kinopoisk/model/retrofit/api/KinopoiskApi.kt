@@ -3,6 +3,7 @@ package com.example.kinopoisk.model.retrofit.api
 import com.example.kinopoisk.model.KinopoiskApp
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
 
 object KinopoiskApi {
@@ -13,6 +14,7 @@ object KinopoiskApi {
             builder.header("Content-Type", "application/json")
             return@Interceptor chain.proceed(builder.build())
         })
+        addInterceptor(HttpLoggingInterceptor().apply {level = HttpLoggingInterceptor.Level.BODY})
     }.build()
 
     private val retrofit by lazy {

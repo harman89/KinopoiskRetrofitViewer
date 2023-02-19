@@ -10,12 +10,14 @@ import com.example.kinopoisk.model.db.UserClass
 import com.example.kinopoisk.model.repository.User
 import com.example.kinopoisk.model.repository.UserRepository
 import com.example.kinopoisk.model.retrofit.data.Film
+import com.example.kinopoisk.model.retrofit.data.TopFilms
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MainViewModel(private val repository: UserRepository = User()) : ViewModel() {
     var user: LiveData<UserClass?> = MutableLiveData<UserClass?>()
     val film :MutableLiveData<Response<Film>> = MutableLiveData()
+    val listFilms : MutableLiveData<Response<TopFilms>> = MutableLiveData()
     //var user : UserClass? = null
     fun insertUser(email: String, password: String) {
         repository.insertUser(UserClass(email,password,false))
@@ -50,7 +52,7 @@ class MainViewModel(private val repository: UserRepository = User()) : ViewModel
     //TODO: Доделать
     fun getTopFilms(page: Int, type : String){
         viewModelScope.launch {
-
+            listFilms.value = repository.getTopFilms(page,type)
         }
     }
 }
