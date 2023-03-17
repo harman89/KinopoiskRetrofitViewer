@@ -2,7 +2,9 @@ package com.example.kinopoisk.model
 
 import android.app.Application
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.kinopoisk.model.db.dbClass
+import java.util.concurrent.Executors
 
 class KinopoiskApp : Application() {
     companion object{
@@ -14,6 +16,13 @@ class KinopoiskApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        db = Room.databaseBuilder(instance,dbClass::class.java,"kinopoiskDb").build()
+        var dbBuilder = Room.databaseBuilder(instance,dbClass::class.java,"kinopoiskDb")
+        val queryCallback = object : RoomDatabase.QueryCallback{
+            override fun onQuery(sqlQuery: String, bindArgs: List<Any?>) : Unit {
+                println("SQL Query: $sqlQuery SQL Args: $bindArgs")
+            }
+        }
+        dbBuilder.setQueryCallback(queryCallback, Executors.newSingleThreadExecutor())
+        db = dbBuilder.build()
     }
 }

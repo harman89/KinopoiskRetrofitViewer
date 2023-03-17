@@ -16,4 +16,10 @@ interface Dao {
     fun insertUser(user : UserClass)
     @Delete
     fun deleteUser(user: UserClass)
+    @Insert
+    fun insertCacheFilms(films : FilmCache)
+    @Update
+    fun updateCacheFilms(films : FilmCache)
+    @Query("SELECT * FROM FilmCache where id = (select max(id) from FilmCache)")
+    fun getFilms() : LiveData<FilmCache?>
 }

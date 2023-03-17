@@ -9,22 +9,37 @@ import com.example.kinopoisk.databinding.FilmItemBinding
 import com.example.kinopoisk.model.retrofit.data.FilmLite
 import com.squareup.picasso.Picasso
 
-class FilmRecyclerAdapter(var films : List<FilmLite> = emptyList()) : RecyclerView.Adapter<FilmRecyclerAdapter.FilmViewHolder>() {
+class FilmRecyclerAdapter(var films : List<FilmLite> = emptyList(), private val onClick : (FilmLite) -> Unit) : RecyclerView.Adapter<FilmRecyclerAdapter.FilmViewHolder>() {
 
-    class FilmViewHolder(binding : FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val imgPoster : ImageView = binding.imageViewFilmList
-        val txtTitle : TextView = binding.textFilmNameList
+    class FilmViewHolder(binding : FilmItemBinding, val onClick: (FilmLite) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+        private val imgPoster : ImageView = binding.imageViewFilmList
+        private val txtTitle : TextView = binding.textFilmNameList
+        private var currentFilm : FilmLite? = null
+
+        init {
+            binding.root.setOnClickListener{
+                currentFilm?.let {
+                    onClick(it)
+                }
+            }
+        }
+
+        fun bind(film: FilmLite) {
+            currentFilm = film
+            Picasso.get().load(film.posterUrl).into(imgPoster)
+            txtTitle.text = film.nameRu
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
         val itemView : LayoutInflater = LayoutInflater.from(parent.context)
         val binding = FilmItemBinding.inflate(itemView, parent, false)
-        return FilmViewHolder(binding)
+        return FilmViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
-        Picasso.get().load(films[position].posterUrl).into(holder.imgPoster)
-        holder.txtTitle.text = films[position].nameRu
+        val film = films[position]
+        holder.bind(film)
     }
 
     override fun getItemCount(): Int {

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.example.kinopoisk.R
 import com.example.kinopoisk.databinding.FragmentFilmDetailBinding
 import com.example.kinopoisk.databinding.FragmentRegisterBinding
@@ -38,7 +39,11 @@ class FilmDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ratingBar.numStars = 10
-        viewModel.getFilm(435)
+        var filmId : Long? = 0
+        filmId = viewModel.chosenFilmId.value
+        if (filmId != null) {
+            viewModel.getFilm(filmId)
+        }
         viewModel.film.observe(viewLifecycleOwner){
             resp->
             resp.body()?.let {
