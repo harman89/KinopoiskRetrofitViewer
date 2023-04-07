@@ -43,7 +43,9 @@ class MainViewModel(private val repository: UserRepository = User()) : ViewModel
             .replace(R.id.container, nextFragment)
             .commit()
     }
-
+    fun updateUser(user: UserClass) {
+        repository.updateUser(user)
+    }
     fun forgetLoggedUser() {
         repository.forgetLoggedUser()
     }

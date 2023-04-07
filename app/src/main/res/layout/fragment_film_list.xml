@@ -10,17 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editTextFilter"
+        <Spinner
+            android:id="@+id/spinnerFilter"
             android:layout_width="356dp"
-            android:layout_height="51dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/Filter"
-            android:inputType="text"
+            android:layout_height="52dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/buttonSearch"
@@ -36,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFilter" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerFilter" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

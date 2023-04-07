@@ -11,7 +11,7 @@ interface Dao {
     @Query("SELECT * FROM User where isLogged = TRUE")
     fun getIsLogged() : LiveData<UserClass?>
     @Update
-    fun logOutUser(user :UserClass)
+    fun updateUser(user :UserClass)
     @Insert
     fun insertUser(user : UserClass)
     @Delete

@@ -11,6 +11,7 @@ interface UserRepository {
     fun insertUser(user : UserClass)
     fun getUser(email : String, password : String) : LiveData<UserClass?>
     fun loginLoggedUser(): LiveData<UserClass?>
+    fun updateUser(user : UserClass)
     fun forgetLoggedUser()
     suspend fun getFilm(id:Long) : Response<Film>
     suspend fun getTopFilms(page : Int, type : String) : Response<TopFilms>

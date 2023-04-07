@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -26,6 +23,7 @@ class LoginFragment : Fragment() {
     private lateinit var buttonBack : Button
     private lateinit var textEmail : EditText
     private lateinit var textPassword : EditText
+    private lateinit var rememberMe : Switch
     private lateinit var valTextEmail : String
     private lateinit var valTextPassword : String
     private lateinit var binding: FragmentLoginBinding
@@ -53,14 +51,20 @@ class LoginFragment : Fragment() {
         buttonBack = binding.buttonLBack
         textEmail = binding.editTextTextEmailAddress
         textPassword = binding.editTextTextPassword
+        rememberMe = binding.switch1
         buttonRegister.setOnClickListener{
             goToFragment(RegisterFragment.newInstance())
         }
         buttonLogin.setOnClickListener{
             valTextEmail = textEmail.text.toString()
             valTextPassword = textPassword.text.toString()
+
             viewModel.getUser(valTextEmail,valTextPassword).observe(activity as MainActivity, Observer {
                 if(it!=null){
+                    if(rememberMe.isChecked) {
+                        it.isLogged = true
+                        viewModel.updateUser(it)
+                    }
                     goToFragment(FilmListFragment.newInstance())
                 }
                 else{

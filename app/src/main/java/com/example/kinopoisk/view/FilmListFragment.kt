@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,6 +27,9 @@ class FilmListFragment : Fragment() {
     private lateinit var buttonBack : Button
     private lateinit var filmAdapter : FilmRecyclerAdapter
     private lateinit var binding: FragmentFilmListBinding
+    private lateinit var filter : Spinner
+    private lateinit var arrayAdapter : ArrayAdapter<String>
+    private var spinnerOptions = arrayOf("Топ 250 лучших фильмов","Топ 100 популярных фильмов","Топ ожидаемых фильмов")
     private val viewModel by activityViewModels<MainViewModel>()
     companion object {
         fun newInstance() = FilmListFragment()
@@ -39,6 +44,10 @@ class FilmListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFilmListBinding.inflate(inflater)
+        filter = binding.spinnerFilter
+        arrayAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,spinnerOptions)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        filter.adapter = arrayAdapter
         filmAdapter = FilmRecyclerAdapter { film -> adapterOnClick(film) }
         binding.recyclerFilmList.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerFilmList.adapter = filmAdapter

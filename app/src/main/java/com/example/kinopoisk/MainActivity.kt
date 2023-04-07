@@ -4,9 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kinopoisk.view.EnterFragment
 /*TODO:
-   2. Auto Login
    4. Filter
-   5. ???
+   5. Разнести по разным ViewModel
 */
 class MainActivity : AppCompatActivity() {
 

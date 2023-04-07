@@ -32,10 +32,17 @@ class User : UserRepository {
         return db.dao().getIsLogged()
     }
 
+    //NOT USED
     override fun forgetLoggedUser() {
         var user : LiveData<UserClass?> = db.dao().getIsLogged()
         user.value?.isLogged = false
-        user.value?.let { db.dao().logOutUser(it) }
+        user.value?.let { db.dao().updateUser(it) }
+    }
+
+    override fun updateUser(user : UserClass) {
+        CoroutineScope(Dispatchers.Default).launch{
+            db.dao().updateUser(user)
+        }
     }
     override suspend fun getFilm(Id: Long) : Response<Film> {
         return KinopoiskApi.api.getFilm(Id)

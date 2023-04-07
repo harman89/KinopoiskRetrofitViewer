@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.ViewModel
+import com.example.kinopoisk.MainActivity
 import com.example.kinopoisk.R
 import com.example.kinopoisk.databinding.FragmentEnterBinding
 import com.example.kinopoisk.viewModel.MainViewModel
@@ -35,6 +37,12 @@ class EnterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.loginLoggedUser().observe(activity as MainActivity){
+            if(it!=null)
+            {
+                goToFragment(FilmListFragment.newInstance())
+            }
+        }
         buttonLogin = binding.buttonLogin
         buttonRegister = binding.buttonRegister
         buttonRegister.setOnClickListener{
